@@ -6,7 +6,7 @@ import {
 } from "@/components/atoms/card";
 import { Link } from "@/i18n/navigation";
 import type { Session } from "@/types/session";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Link as ChakraLink, Text } from "@chakra-ui/react";
 
 interface SpeakerCardProps {
   name: string;
@@ -21,23 +21,33 @@ export function SpeakerCard({ name, sessions }: SpeakerCardProps) {
       </CardHeader>
 
       <CardContent>
-        <Flex as="ul" direction="column" gap="3" listStyle="none">
+        <Flex as="ul" role="list" direction="column" gap="3" listStyle="none">
           {sessions.map(({ id, title, startTime }) => (
             <li key={id}>
-              <Link href={`/sessions/${id}`}>
-                <Flex
-                  direction="column"
-                  gap="0.5"
-                  _hover={{ textDecoration: "underline" }}
-                >
-                  <Text fontSize="sm" color="var(--text-muted)">
+              <ChakraLink
+                asChild
+                display="flex"
+                flexDirection="column"
+                alignItems="stretch"
+                gap="0.5"
+                color="var(--text-primary)"
+                borderRadius="sm"
+                _hover={{ textDecoration: "underline" }}
+                _focusVisible={{
+                  textDecoration: "underline",
+                  outline: "2px solid var(--accent-hex)",
+                  outlineOffset: "2px",
+                }}
+              >
+                <Link href={`/sessions/${id}`}>
+                  <Text fontSize="sm" color="var(--text-secondary)">
                     {startTime}
                   </Text>
                   <Text fontSize="sm" color="var(--text-primary)">
                     {title}
                   </Text>
-                </Flex>
-              </Link>
+                </Link>
+              </ChakraLink>
             </li>
           ))}
         </Flex>

@@ -15,10 +15,11 @@ export default async function SpeakersPage() {
       </PageHeading>
 
       {speakers.length === 0 ? (
-        <Text color="var(--text-muted)">No speakers announced yet.</Text>
+        <Text color="var(--text-secondary)">No speakers announced yet.</Text>
       ) : (
         <Grid
           as="ul"
+          role="list"
           gap="4"
           padding="0"
           listStyle="none"
